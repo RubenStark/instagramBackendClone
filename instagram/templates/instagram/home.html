@@ -1,0 +1,61 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    Home
+    <h1>Hello {{ profile }}</h1>
+    <!-- <img src="{{ profile.imageURL }}" alt=""> -->
+    <p></p>
+    <h1>Following</h1>
+
+
+    <p>{% for following in profile.following.all %}</p>
+    <p>{{ following.profile }}</p>
+    <form action="{% url 'unfollow' following.profile.id %}" method="POST">
+        {% csrf_token %}
+        <button type="submit">unFollow</button>
+    </form>
+    <p>{% endfor %}</p>
+
+
+    <h1>Followers</h1>
+    <p>{% for follower in followers %}</p>
+    <p>{{ follower.profile }}</p>
+    <form action="{% url 'follow' follower.profile.id %}" method="POST">
+        {% csrf_token %}
+        <button type="submit">Follow</button>
+    </form>
+
+    <p>{% endfor %}</p>
+
+    <h1>Posts</h1>
+    <p>{% for post in posts %}</p>
+    <p>{{ post }}</p>
+    <form action="{% url 'like' post.id %}" method="POST">
+        {% csrf_token %}
+        <button type="submit">Like</button>
+    </form>
+    <img src="{{ post.image.url }}" alt="">
+
+    <form action="{% url 'comment' post.id %}" method="POST">
+        {% csrf_token %}
+        <input type="text" name="comment">
+        <button type="submit">Comment</button>
+    </form>
+        {% for post in post.comment_set.all %}
+        <p>{{ post.body }}</p>
+        {% endfor %}
+
+    <p>{% endfor %}</p>
+
+</body>
+
+</html>
