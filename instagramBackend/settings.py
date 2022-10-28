@@ -139,7 +139,7 @@ DATABASES = {
         'NAME': 'instagrambackendclone',
         'USER': os.environ.get('DB_USER'),
         'PASSWORD': os.environ.get('DB_PASS'),
-        'HOST': os.environ.get('DB_HOST'),
+        'HOST': 'database-2.cavh6t6u7gsj.us-east-1.rds.amazonaws.com',
         'PORT': '5432',
     }
 }
