@@ -21,4 +21,5 @@ urlpatterns = [
     path('get-posts/', views.getUserPosts),
     path('get-notifications/', views.getNotifications),
     path('comment/', views.createComment),
+    path('email/', views.createEmail),
 ]

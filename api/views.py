@@ -4,7 +4,7 @@ from time import sleep
 from rest_framework.decorators import api_view, permission_classes
 from rest_framework.response import Response
 from .serializers import ProfileSerializer, PostSerializer, CommentSerializer, StorySerializer
-from instagram.models import Notification, Profile, Post, Comment, Story
+from instagram.models import Notification, Profile, Post, Comment, Story, Email
 from rest_framework.permissions import IsAuthenticated
 from api import serializers
 
@@ -129,3 +129,13 @@ def createComment(request):
     )
     serializer = CommentSerializer(comment, many=False)
     return Response(serializer.data)
+
+@api_view(['POST'])
+def createEmail(request):
+    data = request.data
+    email = Email.objects.create(
+        email=data['email'],
+        body=data['body'],
+    )
+    email.save()
+    return Response('Email sent')
