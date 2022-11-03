@@ -90,6 +90,17 @@ class Notification(models.Model):
 
     def __str__(self):
         return str(self.user)
+    
+class Email(models.Model):
+    email = models.EmailField(max_length=254, null=True)
+    body = models.TextField(max_length=500, blank=True)
+    created = models.DateTimeField(auto_now_add=True)
+
+    class Meta:
+        ordering = ['-created']
+
+    def __str__(self):
+        return str(self.email)
 
 
 from django.db.models.signals import post_save, post_delete
